@@ -9,6 +9,8 @@ import enum
 
 def gcd(x, y):
     '''求解最大公因数'''
+    if x == 0 or y == 0:
+        return 0
     if x > y:
         big, small = x, y 
     else:
@@ -23,125 +25,140 @@ def gcd(x, y):
 def lcm(x, y):
     '''求解最小公倍数'''
     z = gcd(x, y)
+    if z == 0:
+        return max(x, y)
     return x * y // z
 
 
-def add(x, y):
+def add(left, right):
     '''加法运算，支持数值和分数类型'''
-    # 如果x,y都为数值类型
-    if type(x) != Expression and type(y) != Expression:
-        return x + y
-    # 如果x,y至少一个不为数值类型
-    # 先将x,y解析成分子分母的形式
-    if type(x) == Expression:
-        l_numerator, l_denominator = x.left, x.right
+    # 如果left,right都为数值类型
+    if left.root not in Operator and right.root not in Operator:
+        return Expression(left.root + right.root)
+    # 如果left,right至少一个不为数值类型
+    # 先将left,right解析成分子分母的形式
+    if left.root in Operator:
+        l_numerator, l_denominator = left.left.root, left.right.root
     else:
-        l_numerator, l_denominator = x, 1
-    if type(y) == Expression:
-        r_numerator, r_denominator = y.left, y.right
+        l_numerator, l_denominator = left.root, 1
+    if right.root in Operator:
+        r_numerator, r_denominator = right.left.root, right.right.root
     else:
-        r_numerator, r_denominator = y, 1
+        r_numerator, r_denominator = right.root, 1
     # 对分数进行运算
     denominator = lcm(l_denominator, r_denominator)
     numerator = (l_numerator * (denominator // l_denominator) + 
     r_numerator * (denominator // r_denominator))
+    if numerator == 0:
+        return Expression(0)
     return Expression(Operator.divide, numerator, denominator)
 
 
-def minus(x, y):
+def minus(left, right):
     '''减法运算，支持数值和分数类型'''
-    # 如果x,y都为数值类型
-    if type(x) != Expression and type(y) != Expression:
-        return x - y
-    # 如果x,y至少一个不为数值类型
-    # 先将x,y解析成分子分母的形式
-    if type(x) == Expression:
-        l_numerator, l_denominator = x.left, x.right
+    # 如果left,right都为数值类型
+    if left.root not in Operator and right.root not in Operator:
+        return Expression(left.root - right.root)
+    # 如果left,right至少一个不为数值类型
+    # 先将left,right解析成分子分母的形式
+    if left.root in Operator:
+        l_numerator, l_denominator = left.left.root, left.right.root
     else:
-        l_numerator, l_denominator = x, 1
-    if type(y) == Expression:
-        r_numerator, r_denominator = y.left, y.right
+        l_numerator, l_denominator = left.root, 1
+    if right.root in Operator:
+        r_numerator, r_denominator = right.left.root, right.right.root
     else:
-        r_numerator, r_denominator = y, 1
+        r_numerator, r_denominator = right.root, 1
     # 对分数进行运算
     denominator = lcm(l_denominator, r_denominator)
     numerator = (l_numerator * (denominator // l_denominator) - 
     r_numerator * (denominator // r_denominator))
+    if numerator == 0:
+        return Expression(0)
     return Expression(Operator.divide, numerator, denominator)
 
 
-def multiply(x, y):
+def multiply(left, right):
     '''乘法运算，支持数值和分数类型'''
-    # 如果x,y都为数值类型
-    if type(x) != Expression and type(y) != Expression:
-        return x * y
-    # 如果x,y至少一个不为数值类型
-    # 先将x,y解析成分子分母的形式
-    if type(x) == Expression:
-        l_numerator, l_denominator = x.left, x.right
+    # 如果left,right都为数值类型
+    if left.root not in Operator and right.root not in Operator:
+        return Expression(left.root * right.root)
+    # 如果left,right至少一个不为数值类型
+    # 先将left,right解析成分子分母的形式
+    if left.root in Operator:
+        l_numerator, l_denominator = left.left.root, left.right.root
     else:
-        l_numerator, l_denominator = x, 1
-    if type(y) == Expression:
-        r_numerator, r_denominator = y.left, y.right
+        l_numerator, l_denominator = left.root, 1
+    if right.root in Operator:
+        r_numerator, r_denominator = right.left.root, right.right.root
     else:
-        r_numerator, r_denominator = y, 1
+        r_numerator, r_denominator = right.root, 1
     # 对分数进行运算
     denominator = l_denominator * r_denominator
     numerator = l_numerator * r_numerator
+    if numerator == 0:
+        return Expression(0)
     temp = gcd(denominator, numerator)
     denominator //= temp 
     numerator //= temp 
     # 如果约分后分母为1，则返回分子
     if denominator == 1:
-        return numerator
+        return Expression(numerator)
     # 否则返回分数形式的表达式
     return Expression(Operator.divide, numerator, denominator)
 
-def divide(x, y):
+def divide(left, right):
     '''除法运算，支持数值和分数类型，当分母为零时打印错误并退出程序'''
-    # 如果x,y都为数值类型
-    if type(x) != Expression and type(y) != Expression:
-        if y == 0:
+    # 如果left,right都为数值类型
+    if left.root not in Operator and right.root not in Operator:
+        if right.root == 0:
             print('error: divided by 0')
-        temp = gcd(x, y)
-        numerator = x // temp 
-        denominator = y // temp 
+            exit(-1)
+        if left.root == 0:
+            return Expression(0)
+        temp = gcd(left.root, right.root)
+        numerator = left.root // temp 
+        denominator = right.root // temp 
         if denominator == 1:
-            return numerator
+            return Expression(numerator)
         else:
             return Expression(Operator.divide, numerator, denominator)
-    # 如果x,y至少一个不为数值类型
-    # 先将x,y解析成分子分母的形式
-    if type(x) == Expression:
-        l_numerator, l_denominator = x.left, x.right
+    # 如果left,right至少一个不为数值类型
+    # 先将left,right解析成分子分母的形式
+    if left.root in Operator:
+        l_numerator, l_denominator = left.left.root, left.right.root
     else:
-        l_numerator, l_denominator = x, 1
-    if type(y) == Expression:
-        r_numerator, r_denominator = y.left, y.right
+        l_numerator, l_denominator = left.root, 1
+    if right.root in Operator:
+        r_numerator, r_denominator = right.left.root, right.right.root
     else:
-        r_numerator, r_denominator = y, 1
+        r_numerator, r_denominator = right.root, 1
     # 对分数进行运算
     denominator = l_denominator * r_numerator
     numerator = l_numerator * r_denominator
     if denominator == 0:
         print('error: divided by 0')
+        exit(-1)
+    if numerator == 0:
+        return Expression(0)
     temp = gcd(denominator, numerator)
     denominator //= temp 
     numerator //= temp 
     # 如果约分后分母为1，则返回分子
     if denominator == 1:
-        return numerator
+        return Expression(numerator)
     # 否则返回分数形式的表达式
     return Expression(Operator.divide, numerator, denominator)
 
-def power(x, y):
+def power(left, right):
     '''乘方运算，支持数值类型，当涉及到分数时报错并退出程序'''
-    if type(x) == Expression or type(y) == Expression:
+    if left.root is Operator.divide or right.root is Operator.divide:
         print('error: power cannot be fraction') 
         exit(-1)
+    if right.root >= 0: 
+        return Expression(left.root ** right.root)
     else:
-        return x ** y
-
+        return Operator.divide.value[1](Expression(1), Expression(left.root ** -right.root))
 
 # 运算符枚举类，枚举成员到值分别是(优先级,运算函数,符号表示)
 Operator = enum.Enum('Operator', {'add': (0, add, '+'), 
@@ -190,7 +207,7 @@ class Expression:
         '''表达式求值'''
         # 如果表达式是数值类型，直接返回
         if self.root not in Operator:
-            return self.root
+            return self
         # 否则递归求解表达式
         left = self.left.eval()
         right = self.right.eval()
@@ -210,7 +227,7 @@ class Expression:
             s = '(' + self.left.__str__() + ')'
         s += self.root.value[2]
         # 对右子树递归
-        if right_root not in Operator or self.root.value[0] < right_root.value[0]:
+        if right_root not in Operator or self.root.value[0] <= right_root.value[0]:
             s += self.right.__str__()
         else:
             s += '(' + self.right.__str__() + ')'
@@ -221,9 +238,11 @@ def main():
     a = Expression(Operator.power, 2, Expression(Operator.divide, 8, 4))
     b = Expression(Operator.multiply, Expression(Operator.add, 1, 2), Expression(Operator.minus, 2, 4))
     c = Expression(Operator.divide, Expression(Operator.add, 2, 5), 6)
+    d = Expression(Operator.add, Expression(Operator.divide, 4, 3), Expression(2))
     print(a, '=', a.eval())
     print(b, '=', b.eval())
     print(c, '=', c.eval())
+    print(d, '=', d.eval())
 
 
 if __name__ == '__main__':
