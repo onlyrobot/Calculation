@@ -204,7 +204,7 @@ class Expression:
     #     self.root = exp_stack.pop()
 
     def eval(self):
-        '''表达式求值'''
+        '''表达式求值，返回结果为一个表达式'''
         # 如果表达式是数值类型，直接返回
         if self.root not in Operator:
             return self
@@ -227,7 +227,7 @@ class Expression:
             s = '(' + self.left.__str__() + ')'
         s += self.root.value[2]
         # 对右子树递归
-        if right_root not in Operator or self.root.value[0] <= right_root.value[0]:
+        if right_root not in Operator or self.root.value[0] < right_root.value[0]:
             s += self.right.__str__()
         else:
             s += '(' + self.right.__str__() + ')'
