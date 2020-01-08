@@ -4,7 +4,7 @@ Description: gui的问题界面
 '''
 import tkinter as tk
 import linecache as lc
-import  guiMain as guim
+import  gui_main as guim
 
 def getpoint(point):
     return point

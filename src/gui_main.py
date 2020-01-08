@@ -3,8 +3,8 @@ Date: 2020/1/8
 Description: gui的主界面及分数显示界面
 '''
 import tkinter as tk
-import guiQuestion as guiq
-from tkmacosx import Button
+import gui_question as guiq
+
 
 
 class baseinterface():
