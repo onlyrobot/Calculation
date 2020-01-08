@@ -51,6 +51,27 @@ def terminal():
 
 
     print("your points is:" + str(point))
+    print("do you want to record your score?\n" + "1:yes\n2:no")
+    recordFlag = input()
+    if recordFlag == '1':
+        recordScore(str(point))
+    print("1:show score recording\n2:exit\n")
+    showScoreFlag = input()
+    if showScoreFlag == '1':
+        showRecord()
 
     f_handle.close()
-    pass
+
+def recordScore(point):
+    # 存入成绩
+    file = open('score.txt', 'a')
+    file.write(point)
+    file.write('\n')
+    file.close()
+    print("record success\n")
+
+def showRecord():
+    #展示历史成绩
+    file = open('score.txt', 'r')
+    fileConten = file.read()
+    print(fileConten)
