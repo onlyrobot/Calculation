@@ -5,6 +5,7 @@ Description: 定义了表达式的表示方法、如何从字符串中解析表�
 
 
 import enum
+import functools
 
 
 def gcd(x, y):
@@ -19,7 +20,7 @@ def gcd(x, y):
     while z != 0:
         big, small = small, z 
         z = big % small
-    return small
+    return abs(small)
 
 
 def lcm(x, y):
@@ -119,10 +120,11 @@ def divide(left, right):
         temp = gcd(left.root, right.root)
         numerator = left.root // temp 
         denominator = right.root // temp 
-        if denominator == 1:
+        sign = denominator // abs(denominator)
+        if denominator == 1 or denominator == -1:
             return Expression(numerator)
         else:
-            return Expression(Operator.divide, numerator, denominator)
+            return Expression(Operator.divide, numerator * sign, abs(denominator))
     # 如果left,right至少一个不为数值类型
     # 先将left,right解析成分子分母的形式
     if left.root in Operator:
@@ -144,11 +146,12 @@ def divide(left, right):
     temp = gcd(denominator, numerator)
     denominator //= temp 
     numerator //= temp 
+    sign = denominator // abs(denominator)
     # 如果约分后分母为1，则返回分子
-    if denominator == 1:
-        return Expression(numerator)
+    if denominator == 1 or denominator == -1:
+        return Expression(numerator * sign)
     # 否则返回分数形式的表达式
-    return Expression(Operator.divide, numerator, denominator)
+    return Expression(Operator.divide, numerator * sign, abs(denominator))
 
 def power(left, right):
     '''乘方运算，支持数值类型，当涉及到分数时报错并退出程序'''
@@ -166,6 +169,7 @@ Operator = enum.Enum('Operator', {'add': (0, add, '+'),
 'divide': (1, divide, '/'), 'power': (2, power, '^')})
 
 
+@functools.total_ordering
 class Expression:
     '''表达式类，实现表达式树形表示和求值运算
     
@@ -233,16 +237,44 @@ class Expression:
             s += '(' + self.right.__str__() + ')'
         return s
 
+    def get_value(self):
+        temp = self.eval()
+        if temp.root is Operator.divide:
+            return temp.left.root / temp.right.root
+        else:
+            return temp.root
+
+    def __lt__(self, other):
+        a = self.get_value()
+        if type(other) is not Expression:
+            b = other 
+        else:
+            b = other.get_value()
+        return a < b
+
+    def __eq__(self, other):
+        a = self.get_value()
+        if type(other) is not Expression:
+            b = other
+        else:
+            b = other.get_value()
+        return a == b
+
 
 def main():
     a = Expression(Operator.power, 2, Expression(Operator.divide, 8, 4))
     b = Expression(Operator.multiply, Expression(Operator.add, 1, 2), Expression(Operator.minus, 2, 4))
     c = Expression(Operator.divide, Expression(Operator.add, 2, 5), 6)
     d = Expression(Operator.add, Expression(Operator.divide, 4, 3), Expression(2))
+    e = Expression(0)
     print(a, '=', a.eval())
     print(b, '=', b.eval())
     print(c, '=', c.eval())
     print(d, '=', d.eval())
+    print('a<b?', a < b)
+    print('e==0?', e == 0)
+    print('gcd:', gcd(-15, 3))
+    print('lcm:', lcm(3, 5))
 
 
 if __name__ == '__main__':
