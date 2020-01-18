@@ -4,7 +4,8 @@ Description: gui的主界面及分数显示界面
 '''
 import tkinter as tk
 import gui_question as guiq
-
+import utilities as ut
+import tkinter.messagebox
 
 
 class baseinterface():
@@ -20,42 +21,102 @@ class initface():
     def __init__(self, master):
         self.master = master
         self.master.config()
-        self.initface = tk.Frame(self.master, width = 200, height = 200)
-        self.initface.place(x = 240, y = 200)
+        self.initface = tk.Frame(self.master, width = 600, height = 400)
+        self.initface.place(x = 0, y = 0)
         label = tk.Label(self.initface, text = '运算生成器', font = ("宋体", 20))
-        label.place(x = 0, y =0)
-        button = tk.Button(self.initface, text = '开始答题', fg = "red", highlightbackground = 'darkgreen', command = self.change, width = 10)
-        button.place(x = 10, y = 100)
+        label.place(x = 250, y =100)
+        button_gen = tk.Button(self.initface, text = '生成题目', fg = "red", highlightbackground = 'darkgreen', command = self.gen, width = 10)
+        button_gen.place(x = 200, y = 300)
+        button_start = tk.Button(self.initface, text = '开始答题', fg = "red", highlightbackground = 'darkgreen', command = self.change, width = 10)
+        button_start.place(x = 300, y = 300)
+
+    def gen(self,):
+        self.initface.destroy()
+        gen_calculation(self.master)
 
     def change(self,):
         self.initface.destroy()
         #endface(self.master)
+        guiq.showquestion1(self.master)
+        # for i in range [1, 11]:
+        #     guiq.showquestion(self.master, i)
+class gen_calculation():
+    def __init__(self, master):
+        self.master = master
+        self.master.config()
+        self.gen_cal = tk.Frame(self.master, width = 600, height = 400)
+        self.gen_cal.place(x = 0, y = 0)
+        self.label = tk.Label(self.gen_cal, text = "输入想生成的题目数量", font = ("宋体", 20))
+        self.label.place(x = 200, y = 100)
+        self.gen_cal.entry = tk.Entry()
+        self.gen_cal.entry.place(x = 200, y = 200)
+        button = tk.Button(self.gen_cal, text = '开始答题', command = self.change, width = 10)
+        button.place(x = 250, y = 300)
+
+    def change(self, ):
+        input = self.gen_cal.entry.get()
+        input_int = int(input)
+        ut.gen_questions(input_int)
+        tk.messagebox.showinfo('提示','生成题目成功！')
+        self.gen_cal.destroy()
         guiq.showquestion1(self.master)
 
 class endface():
     def __init__(self, master):
         self.master = master
         self.master.config()
-        self.endface = tk.Frame(self.master, width = 200, height = 200)
-        self.endface.place(x = 240, y = 200)
+        self.endface = tk.Frame(self.master, width = 600, height = 400)
+        self.endface.place(x = 0, y = 0)
+        self.label = tk.Label(self.endface, text = '做题结束', font = ("宋体", 20))
+        self.label.place(x = 250, y = 200)
         btnnext = tk.Button(self.endface, text = '结束答题', command = self.change, width = 10)
-        btnnext.place(x = 10, y = 100)
+        btnnext.place(x = 250, y = 300)
+
 
     def change(self,):
         self.endface.destroy()
-        showpoint(self.master)
+        savepoint(self.master)
 
+
+class savepoint():
+    def __init__(self, master):
+        self.master = master
+        self.master.config()
+        self.savepoint = tk.Frame(self.master, width = 600, height = 400)
+        self.savepoint.place(x = 0, y = 0)
+        point = guiq.getpoint()
+        label = tk.Label(self.savepoint, text = ("你的分数是：" + str(point) + "\n输入用户名"), font = ("宋体", 20), fg = "red")
+        label.place(x = 200, y = 100)
+        self.savepoint.entry = tk.Entry()
+        self.savepoint.entry.place(x = 200, y = 200)
+        button = tk.Button(self.savepoint, text = '确定', command = self.determine, width = 10)
+        button.place(x = 250, y = 300)
+
+    def determine(self, ):
+        name = self.savepoint.entry.get()
+
+
+    def save(self, ):
+        point = guiq.getpoint()
+        ut.save_score(int(point))
+        tk.messagebox.showinfo('提示','保存成功！')
+        self.showpoint.destroy()
+        showpoint(self.master)
 
 class showpoint():
     def __init__(self, master):
         self.master = master
         self.master.config()
-        self.showpoint = tk.Frame(self.master, width = 200, height = 200)
-        self.showpoint.place(x = 240, y = 200)
-        #point = guiq.getpoint()
-        point = 50
-        label = tk.Label(self.showpoint, text = ("your point is " + str(point)), font = ("宋体", 20), fg = "red")
-        label.place(x = 0, y = 0)
+        self.showpoint = tk.Frame(self.master, width = 600, height = 400)
+        self.showpoint.place(x = 0, y = 0)
+        button_show = tk.Button(self.showpoint, text = '展示过往分数', command = self.show, width = 10)
+        button_show.place(x = 250, y = 300)
+        button_quit = tk.Button(self.showpoint, text = '关闭', command = root.quit)
+        button_quit.place(x = 300, y = 300)
+
+    def show(self, ):
+        score = ut.read_score()
+
 
 
 

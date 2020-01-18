@@ -14,7 +14,7 @@ def terminal():
     # question_num = input("input how many question do you want")
     # ut.gen_question(question_num)
 
-    f_handle = open("question.txt", mode = 'r', encoding = "utf-8")
+    f_handle = open("../question.txt", mode = 'r', encoding = "utf-8")
     f_content = f_handle.read()
     #print(f_content)
 
