@@ -24,7 +24,8 @@ class showquestion1():
         self.showquestion = tk.Frame(self.master, width = 600, height = 400)
         self.showquestion.place(x = 0, y = 0)
         #随机读出题目
-        num = ran.randint(1, 1000)
+        n = guim.getquestion_num()
+        num = ran.randint(1, n)
         global question_num
         question_num.append(num)
         question = lc.getline('../res/questions.txt', num)
@@ -75,8 +76,9 @@ class showquestion2():
         self.showquestion.place(x = 0, y = 0)
         #找出之前未读取过的题目
         global question_num
+        n = guim.getquestion_num()
         while True:
-            num = ran.randint(1, 1000)
+            num = ran.randint(1, n)
             flag = 1
             for i in question_num:
                 if num == question_num:
@@ -134,8 +136,9 @@ class showquestion3():
         self.showquestion.place(x = 0, y = 0)
         # 找出之前未读取过的题目
         global question_num
+        n = guim.getquestion_num()
         while True:
-            num = ran.randint(1, 1000)
+            num = ran.randint(1, n)
             flag = 1
             for i in question_num:
                 if num == question_num:
@@ -193,8 +196,9 @@ class showquestion4():
         self.showquestion.place(x = 0, y = 0)
         # 找出之前未读取过的题目
         global question_num
+        n = guim.getquestion_num()
         while True:
-            num = ran.randint(1, 1000)
+            num = ran.randint(1, n)
             flag = 1
             for i in question_num:
                 if num == question_num:
@@ -252,8 +256,9 @@ class showquestion5():
         self.showquestion.place(x = 0, y = 0)
         # 找出之前未读取过的题目
         global question_num
+        n = guim.getquestion_num()
         while True:
-            num = ran.randint(1, 1000)
+            num = ran.randint(1, n)
             flag = 1
             for i in question_num:
                 if num == question_num:
@@ -311,8 +316,9 @@ class showquestion6():
         self.showquestion.place(x = 0, y = 0)
         # 找出之前未读取过的题目
         global question_num
+        n = guim.getquestion_num()
         while True:
-            num = ran.randint(1, 1000)
+            num = ran.randint(1, n)
             flag = 1
             for i in question_num:
                 if num == question_num:
@@ -370,8 +376,9 @@ class showquestion7():
         self.showquestion.place(x = 0, y = 0)
         # 找出之前未读取过的题目
         global question_num
+        n = guim.getquestion_num()
         while True:
-            num = ran.randint(1, 1000)
+            num = ran.randint(1, n)
             flag = 1
             for i in question_num:
                 if num == question_num:
@@ -429,8 +436,9 @@ class showquestion8():
         self.showquestion.place(x = 0, y = 0)
         # 找出之前未读取过的题目
         global question_num
+        n = guim.getquestion_num()
         while True:
-            num = ran.randint(1, 1000)
+            num = ran.randint(1, n)
             flag = 1
             for i in question_num:
                 if num == question_num:
@@ -488,8 +496,9 @@ class showquestion9():
         self.showquestion.place(x = 0, y = 0)
         # 找出之前未读取过的题目
         global question_num
+        n = guim.getquestion_num()
         while True:
-            num = ran.randint(1, 1000)
+            num = ran.randint(1, n)
             flag = 1
             for i in question_num:
                 if num == question_num:
@@ -547,8 +556,9 @@ class showquestion10():
         self.showquestion.place(x = 0, y = 0)
         # 找出之前未读取过的题目
         global question_num
+        n = guim.getquestion_num()
         while True:
-            num = ran.randint(1, 1000)
+            num = ran.randint(1, n)
             flag = 1
             for i in question_num:
                 if num == question_num:

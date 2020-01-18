@@ -8,6 +8,11 @@ import utilities as ut
 import tkinter.messagebox
 import time as ti
 
+question_num = 0
+
+def getquestion_num():
+    global question_num
+    return question_num
 
 class baseinterface():
     def __init__(self, master):
@@ -57,6 +62,8 @@ class gen_calculation():
     def change(self, ):
         input = self.gen_cal.entry.get()
         input_int = int(input)
+        global question_num
+        question_num = input_int
         ut.gen_questions(input_int)
         tk.messagebox.showinfo('提示','生成题目成功！')
         self.gen_cal.destroy()
