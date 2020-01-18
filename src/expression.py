@@ -113,8 +113,7 @@ def divide(left, right):
     # 如果left,right都为数值类型
     if left.root not in Operator and right.root not in Operator:
         if right.root == 0:
-            print('error: divided by 0')
-            exit(-1)
+            raise RuntimeError('error: divided by 0')
         if left.root == 0:
             return Expression(0)
         temp = gcd(left.root, right.root)
@@ -139,8 +138,7 @@ def divide(left, right):
     denominator = l_denominator * r_numerator
     numerator = l_numerator * r_denominator
     if denominator == 0:
-        print('error: divided by 0')
-        exit(-1)
+        raise RuntimeError('error: divided by 0')
     if numerator == 0:
         return Expression(0)
     temp = gcd(denominator, numerator)
@@ -156,8 +154,7 @@ def divide(left, right):
 def power(left, right):
     '''乘方运算，支持数值类型，当涉及到分数时报错并退出程序'''
     if left.root is Operator.divide or right.root is Operator.divide:
-        print('error: power cannot be fraction') 
-        exit(-1)
+        raise RuntimeError('error: power cannot be fraction') 
     if right.root >= 0: 
         return Expression(left.root ** right.root)
     else:
@@ -184,28 +181,6 @@ class Expression:
             self.left = Expression(left)
         if right is not None and type(right) is not Expression:
             self.right = Expression(right)
-
-    # def parse(self, s):
-    #     ops = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3, '**': 3}
-    #     exp_stack, op_stack = [], []
-    #     for c in s:
-    #         if c in ops:
-    #             while op_stack and ops[c] <= ops[op_stack[-1]]:
-    #                 exp_stack.append(Expression(op_stack.pop(), exp_stack.pop(), exp_stack.pop()))
-    #             op_stack.append(c)
-    #         elif c == '(':
-    #             op.append('(')
-    #         elif c == ')':
-    #             op = op_stack.pop()
-    #             while op != '(':
-    #                 exp_stack.append(Expression(op, exp_stack.pop(), exp_stack.pop()))
-    #                 op = op_stack.pop()
-    #         else:
-    #             c = float(c)
-    #             exp_stack.append(Expression(c))
-    #     while op_stack:
-    #         exp_stack.append(Expression(op_stack.pop(), exp_stack.pop(), exp_stack.pop()))
-    #     self.root = exp_stack.pop()
 
     def eval(self):
         '''表达式求值，返回结果为一个表达式'''
