@@ -6,6 +6,7 @@ import tkinter as tk
 import gui_question as guiq
 import utilities as ut
 import tkinter.messagebox
+import time as ti
 
 
 class baseinterface():
@@ -94,14 +95,16 @@ class savepoint():
 
     def determine(self, ):
         name = self.savepoint.entry.get()
-
-
-    def save(self, ):
-        point = guiq.getpoint()
-        ut.save_score(int(point))
-        tk.messagebox.showinfo('提示','保存成功！')
-        self.showpoint.destroy()
+        point = str(guiq.getpoint())
+        time = ti.strftime('%Y/%m/%d', ti.localtime())
+        print(time)
+        data = [(name, time, point),]
+        print(data)
+        ut.save_score(data)
+        tk.messagebox.showinfo('提示', '保存成功！')
+        self.savepoint.destroy()
         showpoint(self.master)
+
 
 class showpoint():
     def __init__(self, master):
@@ -109,15 +112,19 @@ class showpoint():
         self.master.config()
         self.showpoint = tk.Frame(self.master, width = 600, height = 400)
         self.showpoint.place(x = 0, y = 0)
-        button_show = tk.Button(self.showpoint, text = '展示过往分数', command = self.show, width = 10)
-        button_show.place(x = 250, y = 300)
-        button_quit = tk.Button(self.showpoint, text = '关闭', command = root.quit)
-        button_quit.place(x = 300, y = 300)
+        self.label = tk.Label(self.showpoint, text = '点击查看最近记录', font = ('宋体', 20))
+        self.label.place(x = 220, y = 100)
+        self.button_show = tk.Button(self.showpoint, text = '展示分数', command = self.show, width = 10)
+        self.button_show.place(x = 250, y = 300)
+
 
     def show(self, ):
+        self.label.place_forget()
+        self.button_show.place_forget()
         score = ut.read_score()
-
-
+        for i in range(-5, 0):
+            label = tk.Label(self.showpoint, text = score[i], font = ('宋体', 20))
+            label.place(x = 100, y = -50 * i)
 
 
 

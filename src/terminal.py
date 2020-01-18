@@ -14,7 +14,7 @@ def terminal():
     # question_num = input("input how many question do you want")
     # ut.gen_question(question_num)
 
-    f_handle = open("../question.txt", mode = 'r', encoding = "utf-8")
+    f_handle = open("../res/questions.txt", mode = 'r', encoding = "utf-8")
     f_content = f_handle.read()
     #print(f_content)
 
@@ -59,7 +59,6 @@ def terminal():
     showScoreFlag = input()
     if showScoreFlag == '1':
         showRecord()
-
     f_handle.close()
 
 def recordScore(point):

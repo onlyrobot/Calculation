@@ -5,10 +5,10 @@ Description: gui的问题界面
 import tkinter as tk
 import linecache as lc
 import  gui_main as guim
-
+import random as ran
 
 point = 0
-
+question_num = []
 def getpoint():
     global point
     return point
@@ -23,7 +23,11 @@ class showquestion1():
         self.master.config()
         self.showquestion = tk.Frame(self.master, width = 600, height = 400)
         self.showquestion.place(x = 0, y = 0)
-        question = lc.getline('../res/questions.txt', 1)
+        #随机读出题目
+        num = ran.randint(1, 1000)
+        global question_num
+        question_num.append(num)
+        question = lc.getline('../res/questions.txt', num)
 
         ans_list = []
         flag = 0
@@ -59,8 +63,8 @@ class showquestion1():
             point += 10
             print(point)
         self.showquestion.destroy()
-        #showquestion2(self.master)
-        guim.endface(self.master)
+        showquestion2(self.master)
+        #guim.endface(self.master)
 
 class showquestion2():
     def __init__(self, master):
@@ -69,7 +73,20 @@ class showquestion2():
         self.master.config()
         self.showquestion = tk.Frame(self.master, width = 600, height = 400)
         self.showquestion.place(x = 0, y = 0)
-        question = lc.getline('../res/questions.txt', 2)
+        #找出之前未读取过的题目
+        global question_num
+        while True:
+            num = ran.randint(1, 1000)
+            flag = 1
+            for i in question_num:
+                if num == question_num:
+                    flag = 0
+            if flag == 1:
+                question_num.append(num)
+                break
+
+        num = question_num[-1]
+        question = lc.getline('../res/questions.txt', num)
 
         ans_list = []
         flag = 0
@@ -115,7 +132,20 @@ class showquestion3():
         self.master.config()
         self.showquestion = tk.Frame(self.master, width = 600, height = 400)
         self.showquestion.place(x = 0, y = 0)
-        question = lc.getline('../res/questions.txt', 3)
+        # 找出之前未读取过的题目
+        global question_num
+        while True:
+            num = ran.randint(1, 1000)
+            flag = 1
+            for i in question_num:
+                if num == question_num:
+                    flag = 0
+            if flag == 1:
+                question_num.append(num)
+                break
+
+        num = question_num[-1]
+        question = lc.getline('../res/questions.txt', num)
 
         ans_list = []
         flag = 0
@@ -161,7 +191,20 @@ class showquestion4():
         self.master.config()
         self.showquestion = tk.Frame(self.master, width = 600, height = 400)
         self.showquestion.place(x = 0, y = 0)
-        question = lc.getline('../res/questions.txt', 4)
+        # 找出之前未读取过的题目
+        global question_num
+        while True:
+            num = ran.randint(1, 1000)
+            flag = 1
+            for i in question_num:
+                if num == question_num:
+                    flag = 0
+            if flag == 1:
+                question_num.append(num)
+                break
+
+        num = question_num[-1]
+        question = lc.getline('../res/questions.txt', num)
 
         ans_list = []
         flag = 0
@@ -207,7 +250,20 @@ class showquestion5():
         self.master.config()
         self.showquestion = tk.Frame(self.master, width = 600, height = 400)
         self.showquestion.place(x = 0, y = 0)
-        question = lc.getline('../res/questions.txt', 5)
+        # 找出之前未读取过的题目
+        global question_num
+        while True:
+            num = ran.randint(1, 1000)
+            flag = 1
+            for i in question_num:
+                if num == question_num:
+                    flag = 0
+            if flag == 1:
+                question_num.append(num)
+                break
+
+        num = question_num[-1]
+        question = lc.getline('../res/questions.txt', num)
 
         ans_list = []
         flag = 0
@@ -253,7 +309,20 @@ class showquestion6():
         self.master.config()
         self.showquestion = tk.Frame(self.master, width = 600, height = 400)
         self.showquestion.place(x = 0, y = 0)
-        question = lc.getline('../res/questions.txt', 6)
+        # 找出之前未读取过的题目
+        global question_num
+        while True:
+            num = ran.randint(1, 1000)
+            flag = 1
+            for i in question_num:
+                if num == question_num:
+                    flag = 0
+            if flag == 1:
+                question_num.append(num)
+                break
+
+        num = question_num[-1]
+        question = lc.getline('../res/questions.txt', num)
 
         ans_list = []
         flag = 0
@@ -299,7 +368,20 @@ class showquestion7():
         self.master.config()
         self.showquestion = tk.Frame(self.master, width = 600, height = 400)
         self.showquestion.place(x = 0, y = 0)
-        question = lc.getline('../res/questions.txt', 7)
+        # 找出之前未读取过的题目
+        global question_num
+        while True:
+            num = ran.randint(1, 1000)
+            flag = 1
+            for i in question_num:
+                if num == question_num:
+                    flag = 0
+            if flag == 1:
+                question_num.append(num)
+                break
+
+        num = question_num[-1]
+        question = lc.getline('../res/questions.txt', num)
 
         ans_list = []
         flag = 0
@@ -345,7 +427,20 @@ class showquestion8():
         self.master.config()
         self.showquestion = tk.Frame(self.master, width = 600, height = 400)
         self.showquestion.place(x = 0, y = 0)
-        question = lc.getline('../res/questions.txt', 8)
+        # 找出之前未读取过的题目
+        global question_num
+        while True:
+            num = ran.randint(1, 1000)
+            flag = 1
+            for i in question_num:
+                if num == question_num:
+                    flag = 0
+            if flag == 1:
+                question_num.append(num)
+                break
+
+        num = question_num[-1]
+        question = lc.getline('../res/questions.txt', num)
 
         ans_list = []
         flag = 0
@@ -391,7 +486,20 @@ class showquestion9():
         self.master.config()
         self.showquestion = tk.Frame(self.master, width = 600, height = 400)
         self.showquestion.place(x = 0, y = 0)
-        question = lc.getline('../res/questions.txt', 9)
+        # 找出之前未读取过的题目
+        global question_num
+        while True:
+            num = ran.randint(1, 1000)
+            flag = 1
+            for i in question_num:
+                if num == question_num:
+                    flag = 0
+            if flag == 1:
+                question_num.append(num)
+                break
+
+        num = question_num[-1]
+        question = lc.getline('../res/questions.txt', num)
 
         ans_list = []
         flag = 0
@@ -437,7 +545,20 @@ class showquestion10():
         self.master.config()
         self.showquestion = tk.Frame(self.master, width = 600, height = 400)
         self.showquestion.place(x = 0, y = 0)
-        question = lc.getline('../res/questions.txt', 10)
+        # 找出之前未读取过的题目
+        global question_num
+        while True:
+            num = ran.randint(1, 1000)
+            flag = 1
+            for i in question_num:
+                if num == question_num:
+                    flag = 0
+            if flag == 1:
+                question_num.append(num)
+                break
+
+        num = question_num[-1]
+        question = lc.getline('../res/questions.txt', num)
 
         ans_list = []
         flag = 0
