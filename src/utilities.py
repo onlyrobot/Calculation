@@ -118,6 +118,11 @@ def gen_questions(n):
     return questions
 
 
+def read_questions():
+    with open(sys.path[0] + '/../res/questions.txt', 'r') as questions_file:
+        return questions_file.read()
+
+
 def set_config(**kargvs):
     '''设置配置信息，参数为键值对'''
     with open(sys.path[0] + '/../res/setting.config', 'rb+') as config_file:
@@ -172,6 +177,8 @@ def read_score():
 def main():
     # 生成1000道不重复的题目
     gen_questions(1000)
+    # 读取题目
+    print(read_questions())
     # 将乘方的显示符号设为^
     set_config(power='^')
     # 获取配置'power'的值
