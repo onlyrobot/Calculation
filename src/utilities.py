@@ -93,7 +93,7 @@ def product_questions(n, questions, a, b, drop_out):
 
 def gen_questions(n):
     '''生成n个不重复的表达式，返回并保存到文件中'''
-    number_num = 100
+    number_num = 35
     numbers = init_numbers(number_num, -100, 100)
     questions = [exp.Expression(number) for number in numbers]
     for pos in range(len(questions)):
@@ -102,9 +102,10 @@ def gen_questions(n):
     last = 0
     while len(questions) - number_num < n:
         temp = len(questions)
-        product_questions(n + number_num, questions, questions[0:: 11], 
-        questions[last::], 0.8)
-        last = temp
+        product_questions(n + number_num, questions, questions[0::], 
+        questions[last::], 0.9)
+        if last != temp:
+            last = temp
     questions = questions[number_num:]
     questions_str = [question.__str__() + '=' + question.eval().__str__() 
     + '\n' for question in questions]
