@@ -319,10 +319,10 @@ FILE
 ## 软件测试
 
 为主要的逻辑模块/函数进行了测试
-|函数/模块名|函数/模块说明|测试模块名|等价类划分|
+|函数，模块名|函数，模块说明|测试模块名|等价类划分|
 |-------|-----------|-----------|-------------|
-|expression|表达式类|expression_test|正常用例/除数为零/乘方中包含分数|
-|utilities::gen_questions|生成题目的函数|utilities_test|生成题目/设置配置项/读取配置项/写入分数历史记录/读取分数历史记录|
+|expression|表达式类|expression_test|正常用例;除数为零；乘方中包含分数|
+|utilities::gen_questions|生成题目的函数|utilities_test|生成题目；设置配置项；读取配置项；写入分数历史记录；读取分数历史记录|
 |utilities::set_config|设置配置信息|utilities_test|配置项组成的键值对|
 |utilities::get_config|读取配置|utilities_test|配置项的键key，返回配置项的值value|
 |utilities::save_score|保存历史得分信息|utilities_test|用户名，时间，分数组成的三元组|
