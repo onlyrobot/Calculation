@@ -31,42 +31,42 @@
 
 ### 命令行：
 
-![terminal_zouxin](../res/img/terminal_zouxin.png)
+![terminal_zouxin](../../res/img/terminal_zouxin.png)
 
 ### GUI：
 
 主界面：
 
-![gui_main_zouxin](../res/img/gui_main_zouxin.png)
+![gui_main_zouxin](../../res/img/gui_main_zouxin.png)
 
 生成题目：
 
-![gui_gen_zouxin](../res/img/gui_gen_zouxin.png)
+![gui_gen_zouxin](../../res/img/gui_gen_zouxin.png)
 
 生成后弹出生成完成窗口：
 
-![gui_gened_zouxin](../res/img/gui_gened_zouxin.png)
+![gui_gened_zouxin](../../res/img/gui_gened_zouxin.png)
 
 回答问题界面：
 
-![gui_q_zouxin](../res/img/gui_q_zouxin.png)
+![gui_q_zouxin](../../res/img/gui_q_zouxin.png)
 
 结束答题：
 
-![gui_end_zouxin](../res/img/gui_end_zouxin.png)
+![gui_end_zouxin](../../res/img/gui_end_zouxin.png)
 
 输入需要保存记录用户名：
 
-![gui_name_zouxin](../res/img/gui_name_zouxin.png)
+![gui_name_zouxin](../../res/img/gui_name_zouxin.png)
 
 保存完成弹出提示窗口：
 
-![gui_named_zouxin](../res/img/gui_named_zouxin.png)
+![gui_named_zouxin](../../res/img/gui_named_zouxin.png)
 
 展示最近的历史分数记录界面：
 
-![gui_show_zouxin](../res/img/gui_show_zouxin.png)
+![gui_show_zouxin](../../res/img/gui_show_zouxin.png)
 
-![gui_showed_zouxin](../res/img/gui_showed_zouxin.png)
+![gui_showed_zouxin](../../res/img/gui_showed_zouxin.png)
 
 ### 
