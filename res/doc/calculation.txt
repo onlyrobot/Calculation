@@ -1,0 +1,22 @@
+Help on module calculation:
+
+NAME
+    calculation
+
+DESCRIPTION
+    Date: 2020/1/3
+    Description: 四则运算出题程序的主调函数
+    usage: calculation [option]
+        or: calculation -n [count]
+        调用交互界面（默认图形用户界面）或者生成指定数量（默认1000道）的四则运算题目到默认文件中
+        -t, --terminal    调用命令行交互界面
+        -g, --gui         调用图形交互界面
+        -n, --num         指定生成的题目数量
+
+FUNCTIONS
+    main()
+
+FILE
+    /home/onlyrobot/E/Project/Calculation/src/calculation.py
+
+

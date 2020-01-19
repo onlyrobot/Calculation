@@ -1,0 +1,131 @@
+Help on module expression:
+
+NAME
+    expression
+
+DESCRIPTION
+    Date: 2019/12/26
+    Description: 定义了表达式的表示方法、如何从字符串中解析表达式、表达式求值等
+
+CLASSES
+    builtins.object
+        Expression
+    enum.Enum(builtins.object)
+        Operator
+    
+    class Expression(builtins.object)
+     |  表达式类，实现表达式树形表示和求值运算
+     |  
+     |  Attributes:
+     |      root: 根节点，可以由运算符或数值充当
+     |      left: 左节点，当根节点是数值时该节点无意义，否则表示表达式的左子节点
+     |      right: 右节点，当根节点是数值时该节点无意义，否则表示表达式到右字节点
+     |  
+     |  Methods defined here:
+     |  
+     |  __eq__(self, other)
+     |      Return self==value.
+     |  
+     |  __ge__(self, other, NotImplemented=NotImplemented)
+     |      Return a >= b.  Computed by @total_ordering from (not a < b).
+     |  
+     |  __gt__(self, other, NotImplemented=NotImplemented)
+     |      Return a > b.  Computed by @total_ordering from (not a < b) and (a != b).
+     |  
+     |  __init__(self, root, left=None, right=None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  __le__(self, other, NotImplemented=NotImplemented)
+     |      Return a <= b.  Computed by @total_ordering from (a < b) or (a == b).
+     |  
+     |  __lt__(self, other)
+     |      Return self<value.
+     |  
+     |  __str__(self)
+     |      将表达式转换成字符串格式
+     |  
+     |  eval(self)
+     |      表达式求值，返回结果为一个表达式
+     |  
+     |  get_value(self)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __hash__ = None
+    
+    class Operator(enum.Enum)
+     |  An enumeration.
+     |  
+     |  Method resolution order:
+     |      Operator
+     |      enum.Enum
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  add = <Operator.add: (0, <function add at 0x7fa2e4f6d598>, '+')>
+     |  
+     |  divide = <Operator.divide: (1, <function divide at 0x7fa2e4f6d730>, '/...
+     |  
+     |  minus = <Operator.minus: (0, <function minus at 0x7fa2e4f6d620>, '-')>
+     |  
+     |  multiply = <Operator.multiply: (1, <function multiply at 0x7fa2e4f6d6a...
+     |  
+     |  power = <Operator.power: (2, <function power at 0x7fa2e4f6d7b8>, '^')>
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from enum.Enum:
+     |  
+     |  name
+     |      The name of the Enum member.
+     |  
+     |  value
+     |      The value of the Enum member.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from enum.EnumMeta:
+     |  
+     |  __members__
+     |      Returns a mapping of member name->value.
+     |      
+     |      This mapping lists all enum members, including aliases. Note that this
+     |      is a read-only view of the internal mapping.
+
+FUNCTIONS
+    add(left, right)
+        加法运算，支持数值和分数类型
+    
+    divide(left, right)
+        除法运算，支持数值和分数类型，当分母为零时打印错误并退出程序
+    
+    gcd(x, y)
+        求解最大公因数
+    
+    lcm(x, y)
+        求解最小公倍数
+    
+    main()
+    
+    minus(left, right)
+        减法运算，支持数值和分数类型
+    
+    multiply(left, right)
+        乘法运算，支持数值和分数类型
+    
+    power(left, right)
+        乘方运算，支持数值类型，当涉及到分数时报错并退出程序
+
+FILE
+    /home/onlyrobot/E/Project/Calculation/src/expression.py
+
+

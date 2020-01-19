@@ -20,6 +20,7 @@ class BaseFrame():
 
 
 class InitFrame():
+    power_symbol = '^'
     def __init__(self, master):
         self.master = master
         self.master.config()
@@ -159,10 +160,12 @@ class ShowPoint():
     def show(self, ):
         self.label.place_forget()
         self.button_show.place_forget()
-        score = utl.read_score()
-        for i in range(-5, 0):
-            label = tk.Label(self.ShowPoint, text = score[i], font = ('宋体', 20))
-            label.place(x = 100, y = -50 * i)
+        scores = utl.read_score()
+        pos = 1
+        for score in scores[:: -1][: 5]:
+            label = tk.Label(self.ShowPoint, text = '\t'.join(score), font = ('宋体', 20))
+            label.place(x = 100, y = 50 * pos)
+            pos += 1
 
 
 

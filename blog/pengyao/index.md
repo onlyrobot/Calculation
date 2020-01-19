@@ -115,6 +115,207 @@
 
 ## 代码实现
 
+总共包含了5个代码文件，分别是expression.py/utilities.py/terminal.py/gui.py/calculation.py，每个文件代表前面提到的模块。代码生成的文档如下：
+
+* [expression](../../res/doc/expression.txt)
+
+```python
+Help on module expression:
+
+NAME
+    expression
+
+DESCRIPTION
+    Date: 2019/12/26
+    Description: 定义了表达式的表示方法、如何从字符串中解析表达式、表达式求值等
+
+CLASSES
+    builtins.object
+        Expression
+    enum.Enum(builtins.object)
+        Operator
+    
+    class Expression(builtins.object)
+     |  表达式类，实现表达式树形表示和求值运算
+     |  
+     |  Attributes:
+     |      root: 根节点，可以由运算符或数值充当
+     |      left: 左节点，当根节点是数值时该节点无意义，否则表示表达式的左子节点
+     |      right: 右节点，当根节点是数值时该节点无意义，否则表示表达式到右字节点
+     |  
+     |  Methods defined here:
+     |  
+     |  __eq__(self, other)
+     |      Return self==value.
+     |  
+     |  __ge__(self, other, NotImplemented=NotImplemented)
+     |      Return a >= b.  Computed by @total_ordering from (not a < b).
+     |  
+     |  __gt__(self, other, NotImplemented=NotImplemented)
+     |      Return a > b.  Computed by @total_ordering from (not a < b) and (a != b).
+     |  
+     |  __init__(self, root, left=None, right=None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  __le__(self, other, NotImplemented=NotImplemented)
+     |      Return a <= b.  Computed by @total_ordering from (a < b) or (a == b).
+     |  
+     |  __lt__(self, other)
+     |      Return self<value.
+     |  
+     |  __str__(self)
+     |      将表达式转换成字符串格式
+     |  
+     |  eval(self)
+     |      表达式求值，返回结果为一个表达式
+     |  
+     |  get_value(self)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __hash__ = None
+    
+    class Operator(enum.Enum)
+     |  An enumeration.
+     |  
+     |  Method resolution order:
+     |      Operator
+     |      enum.Enum
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  add = <Operator.add: (0, <function add at 0x7fa2e4f6d598>, '+')>
+     |  
+     |  divide = <Operator.divide: (1, <function divide at 0x7fa2e4f6d730>, '/...
+     |  
+     |  minus = <Operator.minus: (0, <function minus at 0x7fa2e4f6d620>, '-')>
+     |  
+     |  multiply = <Operator.multiply: (1, <function multiply at 0x7fa2e4f6d6a...
+     |  
+     |  power = <Operator.power: (2, <function power at 0x7fa2e4f6d7b8>, '^')>
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from enum.Enum:
+     |  
+     |  name
+     |      The name of the Enum member.
+     |  
+     |  value
+     |      The value of the Enum member.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from enum.EnumMeta:
+     |  
+     |  __members__
+     |      Returns a mapping of member name->value.
+     |      
+     |      This mapping lists all enum members, including aliases. Note that this
+     |      is a read-only view of the internal mapping.
+
+FUNCTIONS
+    add(left, right)
+        加法运算，支持数值和分数类型
+    
+    divide(left, right)
+        除法运算，支持数值和分数类型，当分母为零时打印错误并退出程序
+    
+    gcd(x, y)
+        求解最大公因数
+    
+    lcm(x, y)
+        求解最小公倍数
+    
+    main()
+    
+    minus(left, right)
+        减法运算，支持数值和分数类型
+    
+    multiply(left, right)
+        乘法运算，支持数值和分数类型
+    
+    power(left, right)
+        乘方运算，支持数值类型，当涉及到分数时报错并退出程序
+
+FILE
+    /home/onlyrobot/E/Project/Calculation/src/expression.py
+```
+
+* [utilities](../../res/doc/utilities.txt)
+
+```python
+Help on module utilities:
+
+NAME
+    utilities
+
+DESCRIPTION
+    Date: 2020/1/2
+    Description: 处理表达式到使用工具
+
+FUNCTIONS
+    check_valid(op, left, right)
+        检查将要生成到表达式是否合法
+    
+    gen_questions(n)
+        生成n个不重复的表达式，返回并保存到文件中
+    
+    get_config(key)
+        获取key的配置信息，当不存在时返回None
+    
+    init_numbers(n, front, back)
+        在指定范围内初始化n个数字作为生成表达式到基础
+        
+        比如随机生成10个0～100中到数字
+        
+        Args:
+            n: 生成多少个数字
+            front: 范围开始（包含）
+            back: 范围结束（包含）
+        
+        Returns:
+            返回生成的数字列表
+    
+    main()
+    
+    product_questions(n, questions, a, b, drop_out)
+        由已生成的表达式组合成更复杂的表达式
+    
+    read_questions()
+    
+    read_score()
+        读取历史分数信息
+        
+        Returns:
+            返回三元组（用户名，时间，获得的分数）组成到列表，每个三元组代表一个历史记录
+    
+    save_score(scores)
+        保存历史分数信息
+        
+        Args:
+            scores: 三元组（用户名，时间，获得的分数）组成的列表
+    
+    set_config(**kargvs)
+        设置配置信息，参数为键值对
+
+FILE
+    /home/onlyrobot/E/Project/Calculation/src/utilities.py
+```
+
+* [calculation](../../res/doc/calculation.txt)
+* [terminal](../../res/doc/terminal.txt)
+* [gui](../../res/doc/gui.txt)
+
 ## 软件测试
 
 为主要的逻辑模块/函数进行了测试
@@ -131,25 +332,55 @@
 
 | PSP2.1           | Personal Software Process Stages  | 预估耗时(分钟) | 实际耗时(分钟)) |
 | -----------------| ----------------------------------| -------------- | --------------- |
-| Planning         | 计划                              |                 |      |
-| *Estimate        | *估计这个任务需要多少时间             | 720             |     |
-| Development      | 开发                               |                 |     |
-| *Analysis        | *需求分析（包括学习新技术）            | 150             |     |
-| *Design Spec     | *生成设计文档                        | 30               |     |
-| *Design Review   | *设计复审（和同事审核设计文档）         | 20               |     |
-| *Coding Standard | *代码规范（为目前的开发制定合适的规范） | 30                 |     |
-| *Design          | *具体设计                          | 20                 |     |
-| *Coding          | *具体编码                         | 480                |     |
-| *Code Review     | *代码复审                         | 60                |     |
-| *Test            | *测试（自我测试，修改代码，提交修改）   | 120                |     |
-| Reporting        | 报告                               |                    |     |
-| *Test Report     | *测试报告                           | 60                  |     |
-| *Size Measurement| *计算工作量                              | 30            |     |
-| *Postmortem & Process Improvement Plan| *总结，并提出过程改进计划| 50           |     |
-|                  | 合计                                   | 1050           |     |
+| Planning         | 计划                              | 120                | 100     |
+| *Estimate        | *估计这个任务需要多少时间             | 720             |  700   |
+| Development      | 开发                               | 600                | 550    |
+| *Analysis        | *需求分析（包括学习新技术）            | 150             |  100   |
+| *Design Spec     | *生成设计文档                        | 30               |  20   |
+| *Design Review   | *设计复审（和同事审核设计文档）         | 20               |  15   |
+| *Coding Standard | *代码规范（为目前的开发制定合适的规范） | 30                 |   55  |
+| *Design          | *具体设计                          | 20                 |  70   |
+| *Coding          | *具体编码                         | 480                | 300    |
+| *Code Review     | *代码复审                         | 60                |  120   |
+| *Test            | *测试（自我测试，修改代码，提交修改）   | 120                | 120    |
+| Reporting        | 报告                               | 180                   |  180   |
+| *Test Report     | *测试报告                           | 60                  | 62    |
+| *Size Measurement| *计算工作量                              | 30            |  30   |
+| *Postmortem & Process Improvement Plan| *总结，并提出过程改进计划| 50           | 53    |
+|                  | 合计                                   | 2670           |  2550   |
 
 ## 最终效果
 
 效果展示
 
-性能展示
+命令用法展示：
+
+![用法展示](../../res/img/usage.png)
+
+用命令生成1000个四则运算题目：
+
+`calculation -n 1000`
+
+![1000道题目效果图](../../res/img/questions.png)
+
+命令行交互界面：
+
+![命令行交互界面](../../res/img/terminal.png)
+
+图形交互界面展示：
+
+主界面：
+
+![主界面](../../res/img/main-frame.png)
+
+生成题目界面：
+
+![生成题目](../../res/img/gen-question.png)
+
+做题界面：
+
+![做题界面](../../res/img/round.png)
+
+历史分数记录界面：
+
+![历史分数](../../res/img/history-score.png)

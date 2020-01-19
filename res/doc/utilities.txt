@@ -1,0 +1,58 @@
+Help on module utilities:
+
+NAME
+    utilities
+
+DESCRIPTION
+    Date: 2020/1/2
+    Description: 处理表达式到使用工具
+
+FUNCTIONS
+    check_valid(op, left, right)
+        检查将要生成到表达式是否合法
+    
+    gen_questions(n)
+        生成n个不重复的表达式，返回并保存到文件中
+    
+    get_config(key)
+        获取key的配置信息，当不存在时返回None
+    
+    init_numbers(n, front, back)
+        在指定范围内初始化n个数字作为生成表达式到基础
+        
+        比如随机生成10个0～100中到数字
+        
+        Args:
+            n: 生成多少个数字
+            front: 范围开始（包含）
+            back: 范围结束（包含）
+        
+        Returns:
+            返回生成的数字列表
+    
+    main()
+    
+    product_questions(n, questions, a, b, drop_out)
+        由已生成的表达式组合成更复杂的表达式
+    
+    read_questions()
+    
+    read_score()
+        读取历史分数信息
+        
+        Returns:
+            返回三元组（用户名，时间，获得的分数）组成到列表，每个三元组代表一个历史记录
+    
+    save_score(scores)
+        保存历史分数信息
+        
+        Args:
+            scores: 三元组（用户名，时间，获得的分数）组成的列表
+    
+    set_config(**kargvs)
+        设置配置信息，参数为键值对
+
+FILE
+    /home/onlyrobot/E/Project/Calculation/src/utilities.py
+
+
