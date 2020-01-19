@@ -109,7 +109,9 @@ def gen_questions(n):
             last = temp
         else:
             questions, last = questions[: number_num], 0
+    
     questions = questions[number_num:]
+    random.shuffle(questions)
     questions_str = [question.__str__() + '=' + question.eval().__str__() 
     + '\n' for question in questions]
     print(sys.path[0])
